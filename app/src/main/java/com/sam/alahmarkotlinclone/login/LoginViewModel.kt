@@ -18,7 +18,7 @@ class LoginViewModel : ViewModel() {
         val loginResponse = MutableLiveData<LoginModel>()
         val response = productRepo.getLogin(name, password, device_token)
 
-        response?.enqueue(object : Callback<LoginModel> {
+            response?.enqueue(object : Callback<LoginModel> {
             override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
                 Log.e("product ","dd ")
                 loginResponse.postValue(response.body())

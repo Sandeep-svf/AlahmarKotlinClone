@@ -29,16 +29,16 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        userEmail = findViewById<AppCompatEditText>(R.id.user_email_edittext)
-        userPassword = findViewById<AppCompatEditText>(R.id.uesr_password_edittext)
-        loginButton = findViewById<AppCompatButton>(R.id.login_button)
+        userEmail = findViewById(R.id.user_email_edittext)
+        userPassword = findViewById(R.id.uesr_password_edittext)
+        loginButton = findViewById(R.id.login_button)
 
 
         loginButton.setOnClickListener(View.OnClickListener {
 
             Toast.makeText(this, "Login button clicked", Toast.LENGTH_SHORT).show()
 
-            if(validation ()){
+            if(validation()){
                 viewModel.getLogin(userEmail.text.toString(),userPassword.text.toString(),"dskdjlfs132").observe(this, Observer {
                     it.let {
 
@@ -47,13 +47,9 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("test_sam",it.message)
                         val token = it.token
                         Log.d("test_sam",token.toString())
-
                         SharedPreferenceUtil.saveAccessToken(token.access.toString())
-
                         val accessToken = SharedPreferenceUtil.getAccessToken()
-
                         Log.d("test_sam",accessToken.toString()+"ok")
-
                         Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
 
                     }
